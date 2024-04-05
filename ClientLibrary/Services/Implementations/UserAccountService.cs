@@ -15,9 +15,9 @@ namespace ClientLibrary.Services.Implementations
         public const string AuthUrl = "api/authentication";
         public async Task<GeneralResponse> CreateAsync(Register user)
         {
-            var httpClientTask = getHttpClient.GetPrivateHttpClient(); // Получаем задачу Task<HttpClient>
-            var httpClient = await httpClientTask; // Дожидаемся завершения задачи и получаем объект HttpClient
-
+            //var httpClientTask = getHttpClient.GetPrivateHttpClient(); // Получаем задачу Task<HttpClient>
+            //var httpClient = await httpClientTask; // Дожидаемся завершения задачи и получаем объект HttpClient
+            var httpClient = getHttpClient.GetPrivateHttpClient().Result;
             var result = await httpClient.PostAsJsonAsync($"{AuthUrl}/register", user);
             if (!result.IsSuccessStatusCode) return new GeneralResponse(false, "Error occurred");
 
